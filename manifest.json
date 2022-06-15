@@ -3,7 +3,7 @@
         "major_version": 2
     },
     "display_information": {
-        "name": "assign-github-triage-bot"
+        "name": "assign-triage-app"
         
     },
     "features": {
@@ -13,7 +13,7 @@
             "messages_tab_read_only_enabled": false
         },
         "bot_user": {
-            "display_name": "assign-github-triage-bot",
+            "display_name": "assign-triage-app",
             "always_online": true
         },
         "shortcuts": [
@@ -72,10 +72,6 @@
                     "channel_id": {
                         "type": "slack#/types/channel_id",
                         "description": "Channel Id"
-                    },
-                    "user_id": {
-                        "type": "slack#/types/user_id",
-                        "description": "User Id"
                     }
                 },
                 "required": [
@@ -158,13 +154,13 @@
             },
             "output_parameters": {
                 "properties": {
-                    "remove_person": {
+                    "removePerson": {
                         "type": "string",
                         "description": "////////////"
                     }
                 },
                 "required": [
-                    "remove_person"
+                    "removePerson"
                 ]
             }
         },

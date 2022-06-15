@@ -3,15 +3,15 @@ const assignTriageDuty= async ({ event, success, error, client }) => {
     var current;
     var fs = require('fs');
   
-    fs.readFile('listeners/functions/rotation.csv', 'utf8', function (err, data) {
+    /*fs.readFileSync('listeners/functions/rotation.csv', 'utf8',  function (err, data) {
         if (err)
             console.log("File read error.");
         else
             current = data.split(",")[0];
 
-    });
-   
-    
+    });*/
+    const data = fs.readFileSync('listeners/functions/rotation.csv',{encoding:'utf8', flag:'r'});
+    current = data.split(",")[0];
    
     try {
         function getMondayOfCurrentWeek() {
@@ -23,10 +23,10 @@ const assignTriageDuty= async ({ event, success, error, client }) => {
         }
             
             
-            const userInfo = await client.users.info({
+       /* const userInfo = await client.users.info({
                 user: event.inputs.user_id
               });
-        const userName = userInfo.user.real_name;
+        const userName = userInfo.user.real_name;*/
         
         const newTopic =  `<@${current}>`.concat(" is now on triage duty for the week of ").concat(getMondayOfCurrentWeek());
 

@@ -1,6 +1,6 @@
 const removePerson = async ({ event, success, error, client}) => {    
 
-const removePerson = event.inputs.remove_person;
+const removeperson = event.inputs.removePerson;
     
   const fs = require('fs');
   var wfArray;
@@ -9,20 +9,26 @@ const removePerson = event.inputs.remove_person;
     catch (err) { console.log("File read error.");}
     });
   
-    /*const userInfo = await client.users.info({
+    try{
+    const userInfo = await client.users.info({
         user: event.inputs.user_id
-    });*/
+    });
 
-  if(removePerson != null){
-    console.log(" xxx "+ removePerson.user_id);
-    const isArgument = (element) => element == removePerson.user_id;
+  if(removeperson != null){
+    console.log("typeof:" +(typeof removeperson));
+    console.log(" xxx "+ removeperson);
+    const isArgument = (element) => element == removeperson;
     const index = wfArray.findIndex(isArgument);   
-
+    console.log("index "+ index);
     if (index > -1) {
      wfArray.splice(index, 1); // 2nd parameter means remove one item only
     }
-   
-    fs.writeFile('listeners/functions/rotation.csv', wfArray, (err) => {
+
+    console.log(wfArray);
+    //wfArray.forEach((element,index) => { wfArray[index]=element.concat(",\n")});
+    wf=wfArray.join(',\n');
+    console.log(wf);
+    fs.writeFile('listeners/functions/rotation.csv', wf, (err) => {
       if (err)
           console.log("File write error");
       else 
@@ -30,36 +36,31 @@ const removePerson = event.inputs.remove_person;
       });
   
   }
-  else {console.log(" removePerson is null ");}
+  else {await error("The selected user is already not in the triage rotation.", err);}
 
   try{
-    const userInfo = await client.users.info({
-        user: event.inputs.user_id
-      });
-    const userName = userInfo.user.real_name;  
-    var newMessage = "Triage rotation has been updated by ".concat(userName);
+        const userInfo = await client.users.info({
+            user: event.inputs.user_id
+        });
+        const userName = userInfo.user.real_name;  
+        var newMessage = "Triage rotation has been updated by ".concat(userName);
 
-    const result = await client.chat.postMessage({
-      channel: event.inputs.channel_id,
-      text: newMessage
-    });
+        const result = await client.chat.postMessage({
+        channel: event.inputs.channel_id,
+        text: newMessage
+        });
+    }
+    catch (err) {
+        // call error callback with function outputs
+        await error('API error', err);
+    }
 
+    await success({ removePerson: "App worked successfully"});
 }
 catch (err) {
-  // call error callback with function outputs
-  await error('API error', err);
-}
-
-  try {
-    await success({ removePerson: "App worked successfully"});
-
-  } catch (err) {
-    // call error callback with function outputs
     await error("There was an issue", err);
-  }
-
+}
 
 };
 
-  
 module.exports = { removePerson };

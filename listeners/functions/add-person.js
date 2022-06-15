@@ -18,6 +18,7 @@ const addPerson = async ({ event, success, error, client}) => {
       });
   
   }
+
   /*if(removePerson != null){
     const index = array.indexOf(newPerson);
     if (index > -1) {
