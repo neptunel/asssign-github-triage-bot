@@ -4,19 +4,13 @@ const removeperson = event.inputs.removePerson;
     
   const fs = require('fs');
   var wfArray;
- /* fs.readFile('listeners/functions/rotation.csv', 'utf8', function (err, data) {
-    try { wfArray = data.split(",\n");;}
-    catch (err) { console.log("File read error.");}
-    });*/
+ 
     var data = fs.readFileSync('listeners/functions/rotation.csv',{encoding:'utf8', flag:'r'});
     try { wfArray = data.split(",\n");;}
     catch (err) { console.log("File read error.");}
     
   
     try{
-   /* const userInfo = await client.users.info({
-        user: event.inputs.user_id
-    });*/
 
   if(removeperson != null){
     const isArgument = (element) => element == removeperson;
