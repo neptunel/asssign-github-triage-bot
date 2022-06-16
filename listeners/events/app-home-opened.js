@@ -3,31 +3,17 @@ const appHomeOpenedCallback = async ({ client, event }) => {
   if (event.tab !== 'home') return;
   
   const fs = require('fs');
-  var workflow;
-    fs.readFile('listeners/functions/rotation.csv', 'utf8', function (err, data) {
-        try { workflow = data;}
-        catch (err) { console.log("File read error.");}
-    });
-   
+ 
+	var workflow = fs.readFileSync('listeners/functions/rotation.csv',{encoding:'utf8', flag:'r'});
+ 
   try {
       
-    const userInfo = await client.users.info({
-      user: event.user
-    });
-
     var currentUsers= workflow.split(","); 
-    console.log("currentUSers: ",currentUsers)
     currentUsers.forEach((element,index) => { currentUsers[index]=element.replace('\n','')});
-    console.log("currentUSers edited: ",currentUsers)
-
-    
-
 
 
     wfArray = workflow.split(',');
-    console.log(wfArray);
-    wfArray.forEach((element,index) => { wfArray[index]='<@'.concat(element.replace('\n','')).concat('>\n')});
-    console.log(wfArray);
+    wfArray.forEach((element,index) => { wfArray[index]='<@'.concat(element.replace('\n','')).concat('>\n')});   
     workflow = wfArray.join('');
 
     await client.views.publish({

@@ -75,8 +75,7 @@
                     }
                 },
                 "required": [
-                    "channel_id",
-                    "user_id"
+                    "channel_id"
                 ]
             },
             "output_parameters": {
@@ -92,8 +91,8 @@
             }
         },
         "addPerson": {
-            "title": "Update Triage Workflow Rotation Add",
-            "description": "Updates or changes the current rotation",
+            "title": "Add a Person to Triage Rotation",
+            "description": "Updates the current rotation by adding the selected user to list",
             "input_parameters": {
                 "properties": {
                     "add_new_person": {
@@ -129,8 +128,8 @@
         },
 
         "removePerson": {
-            "title": "Update Triage Workflow Rotation Remove",
-            "description": "Updates or changes the current rotation",
+            "title": "Remove the Person from Triage Rotation",
+            "description": "Updates the current rotation by removing the selected user",
             "input_parameters": {
                 "properties": {
                     "removePerson": {
@@ -174,16 +173,11 @@
                     "channel_id": {
                         "type": "slack#/types/channel_id",
                         "description": "Channel Id"
-                    },
-                    "user_id": {
-                        "type": "slack#/types/user_id",
-                        "description": "User Id"
                     }
                     
                 },
                 "required": [
-                    "channel_id",
-                    "user_id"
+                    "channel_id"
                 ]
             },
             "output_parameters": {

@@ -1,4 +1,3 @@
-const { assignTriageDuty } = require('./assign-triage-duty');
 
 const advanceRotationOrder = async ({ event, success, error, client}) => { 
     var fs = require('fs');
@@ -28,15 +27,11 @@ const advanceRotationOrder = async ({ event, success, error, client}) => {
     
     var nextWorkflow = workflow;
     var lastTeammate = nextWorkflow.shift();
-    console.log(lastTeammate);
-    //nextWorkflow = workflow.concat(lastTeammate);
-    console.log(nextWorkflow);
+
     for (let i =0 ; i<workflow.length; i++) { 
         workflow[i] = nextWorkflow[i].concat(",") 
     }
     workflow = workflow.concat(lastTeammate);
-
-    console.log(workflow);
 
     var data = workflow.join('\n');
 
